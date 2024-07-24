@@ -1,0 +1,90 @@
+[State]
+Type=Enum
+Items=Global Enabled;Opt-In;Disabled
+Category=Options
+CategoryOrder=0
+Index=0
+Label=State
+Default=Disabled
+Description=
+
+[JobNameFilter]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=1
+Label=Job Name Filter (python regular expression)
+Default=.+
+Description=Job Name Filter (python regular expression)
+
+[GroupFilter]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=2
+Label=Group Filter (python regular expression)
+Default=.+
+Description=Group Filter (python regular expression)
+
+[PluginNameFilter]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=3
+Label=Plugin Name Filter (python regular expression)
+Default=.+
+Description=Plugin Name Filter (python regular expression)
+
+[DraftColorSpaceIn]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=4
+Label=Draft ACES Color Space In
+Default=ACES-ACEScg
+Description=Draft ACES Color Space In
+
+[DraftColorSpaceOut]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=5
+Label=Draft ACES Color Space OUT
+Default=Output-sRGB
+Description=Draft ACES Color Space OUT
+
+[OCIOConfigFile]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=6
+Label=OCIO Config File
+Default=C:\ACES\aces_1.2\config.ocio
+Description=OCIO Config File location
+
+[Priority]
+Type=integer
+Category=Options
+CategoryOrder=0
+CategoryIndex=7
+Label=Job Priority
+Default=50
+Description=
+
+[Quality]
+Type=integer
+Category=Options
+CategoryOrder=0
+CategoryIndex=8
+Label=Movie Quality
+Default=75
+Description=Movie Quality in 0-100 range
+
+[FrameRate]
+Type=integer
+Category=Options
+CategoryOrder=0
+CategoryIndex=8
+Label=Default Movie Framerate
+Default=75
+Description=Default Movie Framerate. If there is "XXfps" in Job comment, it will take XX framerate

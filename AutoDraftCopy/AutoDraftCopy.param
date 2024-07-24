@@ -1,0 +1,46 @@
+[State]
+Type=Enum
+Items=Global Enabled;Opt-In;Disabled
+Category=Options
+CategoryOrder=0
+Index=0
+Label=State
+Default=Disabled
+Description=
+
+[ProjectsDir]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=1
+Label=Projects Directory
+Default=P:\Projekty\
+Description=Where you keep all your projects. 
+
+[Dailies]
+Type=string
+Category=Options
+CategoryOrder=0
+CategoryIndex=2
+Label=Dailies in project folder structure.
+Default=\7_PREVIEWS\DAILIES
+Description=Where you keep your dailies in project structure. 
+
+[CopyToDailies]
+Type=boolean
+Category=Options
+CategoryOrder=0
+Index=3
+Label=Copy To Dailies Directory
+Default=true
+Description=Copy To Dailies Directory.
+
+[CopyToUserDir]
+Type=boolean
+Category=Options
+CategoryOrder=0
+Index=3
+Label=Copy To User Dailies Directory
+Default=false
+Description=Copy To User Directory. User name is taken from Deadline User who sumbitted original job. 
+
