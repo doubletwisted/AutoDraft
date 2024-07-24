@@ -162,7 +162,7 @@ class DraftEventListener (DeadlineEventListener):
             fileHandle.write("Pool={0}\n".format(draftPool))
             fileHandle.write("Group={0}\n".format(draftGroup))
             fileHandle.write("Priority={0}\n".format(draftPriority))
-            fileHandle.write("OnJobComplete=%s\n" % job.JobOnJobComplete) #"delete"
+            fileHandle.write("OnJobComplete=%s\n" % "delete") #job.JobOnJobComplete
             fileHandle.write("ChunkSize=1000000\n")
 
             if draftLimit:

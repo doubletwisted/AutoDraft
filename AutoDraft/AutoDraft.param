@@ -10,54 +10,54 @@ Description=
 
 [JobNameFilter]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=1
+Category=Filters
+CategoryOrder=1
+Index=1
 Label=Job Name Filter (python regular expression)
 Default=.+
 Description=Job Name Filter (python regular expression)
 
 [GroupFilter]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=2
+Category=Filters
+CategoryOrder=1
+Index=2
 Label=Group Filter (python regular expression)
 Default=.+
 Description=Group Filter (python regular expression)
 
 [PluginNameFilter]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=3
+Category=Filters
+CategoryOrder=1
+Index=3
 Label=Plugin Name Filter (python regular expression)
-Default=.+
+Default=^(?!DraftPlugin$).+$
 Description=Plugin Name Filter (python regular expression)
 
 [DraftColorSpaceIn]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=4
+Category=ACES
+CategoryOrder=2
+Index=4
 Label=Draft ACES Color Space In
 Default=ACES-ACEScg
 Description=Draft ACES Color Space In
 
 [DraftColorSpaceOut]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=5
+Category=ACES
+CategoryOrder=2
+Index=5
 Label=Draft ACES Color Space OUT
 Default=Output-sRGB
 Description=Draft ACES Color Space OUT
 
 [OCIOConfigFile]
 Type=string
-Category=Options
-CategoryOrder=0
-CategoryIndex=6
+Category=ACES
+CategoryOrder=2
+Index=6
 Label=OCIO Config File
 Default=C:\ACES\aces_1.2\config.ocio
 Description=OCIO Config File location
@@ -65,8 +65,8 @@ Description=OCIO Config File location
 [Priority]
 Type=integer
 Category=Options
-CategoryOrder=0
-CategoryIndex=7
+CategoryOrder=3
+Index=7
 Label=Job Priority
 Default=50
 Description=
@@ -74,8 +74,8 @@ Description=
 [Quality]
 Type=integer
 Category=Options
-CategoryOrder=0
-CategoryIndex=8
+CategoryOrder=3
+Index=8
 Label=Movie Quality
 Default=75
 Description=Movie Quality in 0-100 range
@@ -83,8 +83,8 @@ Description=Movie Quality in 0-100 range
 [FrameRate]
 Type=integer
 Category=Options
-CategoryOrder=0
-CategoryIndex=8
+CategoryOrder=3
+Index=9
 Label=Default Movie Framerate
-Default=75
+Default=30
 Description=Default Movie Framerate. If there is "XXfps" in Job comment, it will take XX framerate
