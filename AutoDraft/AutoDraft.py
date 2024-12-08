@@ -245,7 +245,7 @@ class DraftEventListener (DeadlineEventListener):
             return
 
         jobNameFilter = self.GetConfigEntryWithDefault('JobNameFilter', '.+')
-        if re.match(r'^(hudy_redshift)$', job.Group) and not re.match(jobNameFilter, job.JobName):
+        if not re.match(jobNameFilter, job.JobName):
             return
 
         pluginNameFilter = self.GetConfigEntryWithDefault('PluginNameFilter', '')
