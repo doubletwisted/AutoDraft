@@ -209,21 +209,31 @@ class DraftEventListener (DeadlineEventListener):
     ## This is called when the job finishes rendering.
     def OnJobFinished(self, job):
         # type: (Job) -> None
-        # Reset those in case the script was not reloaded
+        # Add debug logging at the start
+        ClientUtils.LogText("AutoDraft: Starting OnJobFinished handler")
+        
+        # Add logging for filters
+        ClientUtils.LogText(f"AutoDraft: Checking filters - Job Group: {job.Group}, Job Name: {job.JobName}, Plugin: {job.JobPlugin}")
+        
         groupFilter = self.GetConfigEntryWithDefault('GroupFilter', '.+')
         if not re.match(groupFilter, job.Group):
-            ClientUtils.LogText("Group filter not matched.  Skipping Draft job submission.")
+            ClientUtils.LogText(f"AutoDraft: Group filter not matched. Group: {job.Group}, Filter: {groupFilter}")
             return
 
         jobNameFilter = self.GetConfigEntryWithDefault('JobNameFilter', '.+')
         if not re.match(jobNameFilter, job.JobName):
-            ClientUtils.LogText("Job name filter not matched.  Skipping Draft job submission.")
+            ClientUtils.LogText(f"AutoDraft: Job name filter not matched. Name: {job.JobName}, Filter: {jobNameFilter}")
             return
 
         pluginNameFilter = self.GetConfigEntryWithDefault('PluginNameFilter', '.+')
         if not re.match(pluginNameFilter, job.JobPlugin):
-            ClientUtils.LogText("Plugin name filter not matched.  Skipping Draft job submission.")
+            ClientUtils.LogText(f"AutoDraft: Plugin name filter not matched. Plugin: {job.JobPlugin}, Filter: {pluginNameFilter}")
             return
+
+        # Add logging for OCIO path check
+        ocio_config_file = self.GetConfigEntryWithDefault("OCIOConfigFile", r"C:\ACES\aces_1.2\config.ocio")
+        if not os.path.exists(ocio_config_file):
+            ClientUtils.LogText(f"AutoDraft: Warning - OCIO config file not found at: {ocio_config_file}")
 
         self.OutputPathCollection = {}
         self.DraftSuffixDict = {}
@@ -280,7 +290,19 @@ class DraftEventListener (DeadlineEventListener):
 
             ClientUtils.LogText("====Submitting Job for Output {0} of {1}====".format(i + 1, outputCount))
             
-            self.CreateDraftJob(draftQuickScript, job, "AutoDraft", outputIndex=i, draftArgs=scriptArgs, mode=mode, quickDraftFormat=format)
+            try:
+                # Before creating Draft job
+                ClientUtils.LogText(f"AutoDraft: Attempting to create Draft job with script: {draftQuickScript}")
+                
+                # Verify the Draft script exists
+                if not os.path.exists(draftQuickScript):
+                    ClientUtils.LogText(f"AutoDraft: Error - Draft Quick Script not found at: {draftQuickScript}")
+                    return
+                    
+                self.CreateDraftJob(draftQuickScript, job, "AutoDraft", outputIndex=i, draftArgs=scriptArgs, mode=mode, quickDraftFormat=format)
+            except Exception as e:
+                ClientUtils.LogText(f"AutoDraft: Error creating Draft job: {str(e)}")
+                ClientUtils.LogText(f"AutoDraft: Traceback: {traceback.format_exc()}")
 
 
     def CallDeadlineCommand(self, arguments):
