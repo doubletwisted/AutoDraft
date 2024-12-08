@@ -113,7 +113,6 @@ class DraftEventListener (DeadlineEventListener):
         draftGroup = self.GetConfigEntryWithDefault("DraftGroup", "").strip()
         draftPool = self.GetConfigEntryWithDefault("DraftPool", "").strip()
         draftLimit = self.GetConfigEntryWithDefault("DraftLimit", "").strip()
-        draftPriorityOffset = self.GetIntegerConfigEntryWithDefault("PriorityOffset", 0)
 
         if not draftGroup:
             draftGroup = job.Group
@@ -121,7 +120,6 @@ class DraftEventListener (DeadlineEventListener):
         if not draftPool:
             draftPool = job.Pool
 
-        # TODO: Handle custom max priority?
         draftPriority = self.GetConfigEntryWithDefault('Priority', '50') #max(0, min(100, job.Priority + draftPriorityOffset))
 
         
@@ -175,34 +173,6 @@ class DraftEventListener (DeadlineEventListener):
             if dependencies:
                 fileHandle.write("JobDependencies=%s\n" % dependencies)
             
-            if mode:
-                self.LogInfo("MODE: " + mode)
-                
-                modeParts = mode.split('|')
-                if len(modeParts) == 2:
-                    modeType = modeParts[0]
-                    
-                    if modeType == "Shotgun":
-                        shotgunMode = modeParts[1]
-                    
-                        #Get the shotgun ID from the job
-                        shotgunID = job.GetJobExtraInfoKeyValue("VersionId")
-                        if (shotgunID == ""):
-                            ClientUtils.LogText("WARNING: Could not find an associated Shotgun Version ID.  The Draft output will not be uploaded to Shotgun.")
-                        else:
-                            #Pull any SG info from the other job
-                            fileHandle.write("ExtraInfo0={0}\n".format(job.ExtraInfo0))
-                            fileHandle.write("ExtraInfo1={0}\n".format(job.ExtraInfo1))
-                            fileHandle.write("ExtraInfo2={0}\n".format(job.ExtraInfo2))
-                            fileHandle.write("ExtraInfo3={0}\n".format(job.ExtraInfo3))
-                            fileHandle.write("ExtraInfo4={0}\n".format(job.ExtraInfo4))
-                            fileHandle.write("ExtraInfo5={0}\n".format(job.ExtraInfo5))
-
-                            #Only bother with the necessary KVPs
-                            fileHandle.write("ExtraInfoKeyValue0=VersionId={0}\n".format(shotgunID))
-                            fileHandle.write("ExtraInfoKeyValue1=TaskId={0}\n".format(job.GetJobExtraInfoKeyValue('TaskId')))
-                            fileHandle.write("ExtraInfoKeyValue2=Mode={0}\n".format(shotgunMode))
-
 
         # Build the Draft plugin info file
         with tempfile.NamedTemporaryFile(mode="w", dir=deadlineTemp, delete=False) as fileHandle:
@@ -242,14 +212,17 @@ class DraftEventListener (DeadlineEventListener):
         # Reset those in case the script was not reloaded
         groupFilter = self.GetConfigEntryWithDefault('GroupFilter', '.+')
         if not re.match(groupFilter, job.Group):
+            ClientUtils.LogText("Group filter not matched.  Skipping Draft job submission.")
             return
 
         jobNameFilter = self.GetConfigEntryWithDefault('JobNameFilter', '.+')
         if not re.match(jobNameFilter, job.JobName):
+            ClientUtils.LogText("Job name filter not matched.  Skipping Draft job submission.")
             return
 
-        pluginNameFilter = self.GetConfigEntryWithDefault('PluginNameFilter', '')
+        pluginNameFilter = self.GetConfigEntryWithDefault('PluginNameFilter', '.+')
         if not re.match(pluginNameFilter, job.JobPlugin):
+            ClientUtils.LogText("Plugin name filter not matched.  Skipping Draft job submission.")
             return
 
         self.OutputPathCollection = {}
@@ -307,7 +280,7 @@ class DraftEventListener (DeadlineEventListener):
 
             ClientUtils.LogText("====Submitting Job for Output {0} of {1}====".format(i + 1, outputCount))
             
-            self.CreateDraftJob(draftQuickScript, job, "Quick Draft", outputIndex=i, draftArgs=scriptArgs, mode=mode, quickDraftFormat=format)
+            self.CreateDraftJob(draftQuickScript, job, "AutoDraft", outputIndex=i, draftArgs=scriptArgs, mode=mode, quickDraftFormat=format)
 
 
     def CallDeadlineCommand(self, arguments):
