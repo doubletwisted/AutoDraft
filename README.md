@@ -1,3 +1,4 @@
+<meta name="google-site-verification" content="cZdJ0LEvBAC2lOvQOvaN-YL6bEHHTN5vQlyFFD8oePA" />
 # AutoDraft
 AutoDraft is a Deadline Event Plugin for simple creation of previews from rendered jobs. 
 
