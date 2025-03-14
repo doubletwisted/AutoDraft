@@ -4,6 +4,7 @@
 AutoDraft is a Deadline Event Plugin for simple creation of previews from rendered jobs. 
 
 ## Overview
+<meta name="google-site-verification" content="AFzLsp5zLKOjOF9omvBZGrYNX4bEUbJVNfeYjk136Y4" />
 AutoDraft is a Deadline Event Plugin based on the original DraftEventPlugin designed to simplify using Draft in Deadline with easy-to-do configuration. It triggers the creation of a draft job upon job completion, which processes the rendered sequence. After Draft job is completed it will be deleted. 
 AutoDraftCopy copies AutoDraft output to selected directories for example for dailies. 
 
