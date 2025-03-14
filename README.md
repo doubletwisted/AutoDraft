@@ -1,5 +1,6 @@
-<meta name="google-site-verification" content="cZdJ0LEvBAC2lOvQOvaN-YL6bEHHTN5vQlyFFD8oePA" />
+<meta name="google-site-verification" content="AFzLsp5zLKOjOF9omvBZGrYNX4bEUbJVNfeYjk136Y4" />
 # AutoDraft
+<meta name="google-site-verification" content="AFzLsp5zLKOjOF9omvBZGrYNX4bEUbJVNfeYjk136Y4" />
 AutoDraft is a Deadline Event Plugin for simple creation of previews from rendered jobs. 
 
 ## Overview
@@ -47,4 +48,4 @@ AutoDraftCopy copies AutoDraft output to selected directories for example for da
   - **Description:** Default frame rate for the movie. If the job comment includes "XXfps", it will use that frame rate. Default is `30`.
 
 
-<meta name="google-site-verification" content="cZdJ0LEvBAC2lOvQOvaN-YL6bEHHTN5vQlyFFD8oePA" />
+<meta name="google-site-verification" content="AFzLsp5zLKOjOF9omvBZGrYNX4bEUbJVNfeYjk136Y4" />
